@@ -19,5 +19,8 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+// Routes
 app.use('/api', audioRoutes);
+
+// Server Listen
 app.listen(3000, () => console.log("🚀 Server running on port 3000"));
