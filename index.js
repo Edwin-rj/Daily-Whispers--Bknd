@@ -14,10 +14,14 @@ mongoose.connect(process.env.MONGO_URL)
   .catch(err => console.error("❌ MongoDB error:", err));
 
 // Firebase Admin Setup
-const serviceAccount = require('./firebaseServiceAccount.json');
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+  })
 });
+
 
 // Routes
 app.use('/api', audioRoutes);
